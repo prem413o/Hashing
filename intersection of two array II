@@ -1,0 +1,39 @@
+import java.util.*;
+class Solution {
+    public static int[]  intersect(int[] nums1, int[] nums2) {
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<nums1.length;i++){
+            if(!hm.containsKey(nums1[i])){
+                hm.put(nums1[i],1);
+            }else{
+                hm.put(nums1[i],hm.get(nums1[i])+1);
+            }
+        }
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int j=0;j<nums2.length;j++){
+            if(hm.containsKey(nums2[j])){
+                list.add(nums2[j]);
+                if(hm.get(nums2[j])==1){
+                    hm.remove(nums2[j]);
+                }else{
+                    hm.put(nums2[j],hm.get(nums2[j])-1);
+                }
+                
+            }
+        }
+        int temp[]=new int[list.size()];
+        for(int i=0;i<list.size();i++){
+            temp[i]=list.get(i);
+        }
+        return temp;
+    }
+    public static void main(String args[]){
+        int nums1[]={1,2,2,1};
+        int nums2[]={2,2};
+        int num[]=intersect(nums1,nums2);
+        for(int i=0;i<num.length;i++){
+            System.out.print(num[i] + " ");
+        }
+        
+    }
+}
