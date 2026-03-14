@@ -1,0 +1,31 @@
+import java.util.*;
+class Solution {
+    public static int firstUniqueEven(int[] nums) {
+        LinkedHashSet<Integer> map=new LinkedHashSet<>();
+        int prev=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i] % 2==0){
+                if(prev==nums[i]){
+                    continue;
+                }else if(map.contains(nums[i])){
+                    prev=nums[i];
+                    map.remove(nums[i]);
+                }else{
+                    map.add(nums[i]);
+                }
+            }
+        }
+        
+        for(Integer m : map){
+            return m;
+        }
+        
+        return -1;
+    }
+    public static void main(String args[]){
+        int nums[]={2, 2, 2, 4};
+        System.out.println(firstUniqueEven(nums));
+        
+        
+    }
+}
