@@ -1,0 +1,24 @@
+import java.util.*;
+class Solution {
+    public static  int firstMissingPositive(int[] nums) {
+        HashSet<Integer> hs=new HashSet<>();
+        int max=-1;
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<nums.length;i++){
+            hs.add(nums[i]);
+            max=Math.max(nums[i],max);
+        }
+        for(int i=0;i<=nums.length;i++){
+            if(!hs.contains(i)){
+                if(i>0){
+                    min=Math.min(min,i);
+                }
+            }
+        }
+        return min;
+    }
+    public static void main(String args[]){
+        int nums[]={7,8,9,11,12};
+        System.out.println(firstMissingPositive(nums));
+    }
+}
