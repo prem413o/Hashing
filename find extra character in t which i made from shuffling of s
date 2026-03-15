@@ -1,0 +1,40 @@
+import java.util.*;
+class Solution {
+    public static char findTheDifference(String s, String t) {
+        HashMap<Character,Integer> map=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            if(!map.containsKey(c)){
+                map.put(c,1);
+            }else{
+                map.put(c,map.get(c)+1);
+            }
+        }
+        
+        for(int j=0;j<t.length();j++){
+            char m=t.charAt(j);
+            
+            if(map.containsKey(m)){
+                if(map.get(m)==1){
+                    map.remove(m);
+                }else{
+                     map.put(m,map.get(m)-1);
+                }
+               
+            }else{
+                map.put(m,1);
+            }
+        }
+        
+        for(Character d: map.keySet()){
+            return d;
+        }
+        return '\0';
+        
+    }
+    public static void main(String args[]){
+        String s="";
+        String t="y";
+        System.out.println(findTheDifference(s,t));
+    }
+}
