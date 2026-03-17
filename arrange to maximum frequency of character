@@ -1,0 +1,37 @@
+import java.util.*;
+class Solution {
+    public static String frequencySort(String s) {
+        HashMap<Character,Integer> map=new HashMap<>();
+        
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(!map.containsKey(ch)){
+                map.put(ch,1);
+            }else{
+                map.put(ch,map.get(ch)+1);
+            }
+        }
+        StringBuilder sb=new StringBuilder("");
+        int n=map.size();
+        for(int i=0;i<n;i++){
+            char element='\0';
+            int maxfreq=0;
+            
+            for(Character m: map.keySet()){
+                if(map.get(m)>maxfreq){
+                    maxfreq=map.get(m);
+                    element=m;
+                }
+            }
+            for(int j=0;j<maxfreq;j++){
+                sb.append(element);
+            }
+            map.remove(element);
+        }
+        return sb.toString();
+    }
+    public static void main(String args[]){
+        String s="Aabb";
+        System.out.println(frequencySort(s));
+    }
+}
