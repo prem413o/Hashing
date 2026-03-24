@@ -1,0 +1,50 @@
+import java.util.*;
+class Solution {
+    public static boolean isHappy(int n) {
+        HashMap<Integer,Integer>map=new HashMap<>();
+        HashSet<Integer> hs=new HashSet<>();
+        for(int i=0;i<10;i++){
+            map.put(i,i*i);
+        }
+        if(n<10){
+            if(n==1 || n==7){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        hs.add(n);
+        int newN=0;
+        
+        while(true){
+           
+            int r=n%10;
+           
+            if(map.containsKey(r)){
+                newN+=map.get(r);
+                
+            }
+           
+            n=n/10;
+        
+            if(n==0){
+                if(newN==1){
+                    return true ;
+                }
+                n=newN;
+                if(hs.contains(n)){
+                    return false;
+                
+                }else{
+                    hs.add(n);
+                }
+                newN=0;
+            }
+        }
+        
+        
+    }
+    public static void main(String args[]){
+        System.out.println(isHappy(19));
+    }
+}
