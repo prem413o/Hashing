@@ -1,0 +1,21 @@
+import java.util.*;
+class Solution {
+    public static int removeDuplicates(int[] nums) {
+        HashSet<Integer>hm=new HashSet<>();
+        for(int i=0;i<nums.length;i++){
+            if(!hm.contains(nums[i])){
+                hm.add(nums[i]);
+            }
+        }
+        int k=0;
+        for(Integer m : hm){
+            nums[k]=m;
+            k++;
+        }
+        return hm.size();
+    }
+    public static void main(String args[]){
+        int nums[]={1,1,2};
+        System.out.println(removeDuplicates(nums));
+    }
+}
