@@ -1,0 +1,51 @@
+import java.util.*;
+class Solution {
+    public static int mirrorFrequency(String s) {
+        HashMap<Character,Character> map=new HashMap<>();
+        for(char ch = 'a'; ch <= 'z'; ch++) {
+            char mirror = (char) ('z' - (ch - 'a'));
+            map.put(ch, mirror);
+        }
+        HashMap<Character,Character> hm=new HashMap<>();
+        for(char c='0';c<='9';c++){
+            char m=(char)('9'-(c-'0'));
+            hm.put(c,m);
+        }
+        
+        HashMap<Character,Integer> f=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            char th=s.charAt(i);
+            if(!f.containsKey(th)){
+                f.put(th,1);
+            }else{
+                f.put(th,f.get(th)+1);
+            }
+        }
+        int fc=-1;
+        int fm=-1;
+        int sum=0;
+        
+        for(int j=0;j<s.length();j++){
+            char dm=s.charAt(j);
+            if(dm<=map.get(dm) || dm<=hm.get(dm)){
+                 if(map.containsKey(dm) || hm.containsKey(dm)){
+                if(f.containsKey(map.get(dm)) || f.containsKey(hm.get(dm))){
+                    int tc=f.get(dm);
+                    Integer val = f.get(map.get(dm));
+
+                    int tm = (val != null) ? val : f.get(hm.get(dm));
+                    sum=sum+(tc-tm);
+                }else{
+                    int tc=f.get(dm);
+                    sum=sum+tc;
+                }
+            }
+            }
+           
+        }
+        return sum;
+    }
+    public static void main(String args[]){
+        System.out.println(mirrorFrequency("kk"));
+    }
+}
