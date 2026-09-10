@@ -1,0 +1,39 @@
+import java.util.*;
+class Solution {
+    public int countSpecialIntegers(int[] nums) {
+        HashMap<Integer,Integer>map=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(!map.containsKey(nums[i])){
+                map.put(nums[i],1);
+            }else{
+                map.put(nums[i],map.get(nums[i])+1);
+            }
+        }
+
+        HashMap<Integer,Integer>left=new HashMap<>();
+        HashMap<Integer,Integer>right=new HashMap<>();
+
+        for(int i=0;i<nums.length;i++){
+            if(!left.containsKey(nums[i])){
+                left.put(nums[i],i);
+            }else{
+                right.put(nums[i],i);
+            }
+        }
+        int count=0;
+        for(Integer k:left.keySet()){
+            int l=left.get(k);
+            int r=0;
+            if(!right.containsKey(k)){
+                r=l;
+            }else{
+                r=right.get(k);
+            }
+
+            if((r-l+1)==map.get(k)){
+                count++;
+            }
+        }
+        return count;
+    }
+}
